@@ -58,43 +58,38 @@ describe("Test for queries and mutation", function () {
         });
     }); });
     it("Get all organizations", function (done) {
-        try {
-            request
-                .post(BASE_URL)
-                .send({
-                query: "{organizations{organization, _id}}",
-            })
-                .set("Accept", "Application/json")
-                .expect("Content-Type", /json/)
-                .end(function (err, res) {
-                if (err)
-                    return done(err);
-                expect(res.body).toBeInstanceOf(Object);
-                expect(res.body.data.organizations.length).toEqual(length);
-                done();
-            });
-        }
-        catch (error) {
-            console.log("error " + error.toString());
-        }
+        request
+            .post(BASE_URL)
+            .send({
+            query: "{organizations{organization, _id}}",
+        })
+            .set("Accept", "Application/json")
+            .expect("Content-Type", /json/)
+            .end(function (err, res) {
+            if (err)
+                return done(err);
+            expect(res.body).toBeInstanceOf(Object);
+            expect(res.body.data.organizations.length).toEqual(length);
+            done();
+        });
     });
-    // it("Get organizations by id", done => {
-    // 	request
-    // 		.post(BASE_URL)
-    // 		.send({
-    // 			query:
-    // 				'{ organization(_id:"5f7333f21df58658f848fe12") { organization, ceo, marketValue} }',
-    // 		})
-    // 		.expect(200)
-    // 		.end((err, res) => {
-    // 			// res will contain array with one organization
-    // 			if (err) return done(err);
-    // 			expect(res.body.data.organization).toHaveProperty("organization");
-    // 			expect(res.body.data.organization).toHaveProperty("ceo");
-    // 			expect(res.body.data.organization).toHaveProperty("marketValue");
-    // 			done();
-    // 		});
-    // });
+    it("Get organizations by id", function (done) {
+        request
+            .post(BASE_URL)
+            .send({
+            query: '{ organization(_id:"5f7333f21df58658f848fe12") { organization, ceo, marketValue} }',
+        })
+            .expect(200)
+            .end(function (err, res) {
+            // res will contain array with one organization
+            if (err)
+                return done(err);
+            expect(res.body.data.organization).toHaveProperty("organization");
+            expect(res.body.data.organization).toHaveProperty("ceo");
+            expect(res.body.data.organization).toHaveProperty("marketValue");
+            done();
+        });
+    });
     // it("Creates organizations", done => {
     // 	request
     // 		.post(BASE_URL)
@@ -124,20 +119,20 @@ describe("Test for queries and mutation", function () {
     // 			done();
     // 		});
     // });
-    // it("Updates organizations", done => {
-    // 	request
-    // 		.post(BASE_URL)
-    // 		.send({
-    // 			query:
-    // 				'mutation { updateOrganization (_id:"5f7333f21df58658f848fe12", organization:"demo-org", marketValue:"100%") { _id , organization} }',
-    // 		})
-    // 		.expect(200)
-    // 		.end((err, res) => {
-    // 			if (err) return done(err);
-    // 			expect(res.body.data.updateOrganization).toHaveProperty("organization");
-    // 			done();
-    // 		});
-    // });
+    it("Updates organizations", function (done) {
+        request
+            .post(BASE_URL)
+            .send({
+            query: 'mutation { updateOrganization (_id:"5f7333f21df58658f848fe12", organization:"demo-org", marketValue:"100%") { _id , organization} }',
+        })
+            .expect(200)
+            .end(function (err, res) {
+            if (err)
+                return done(err);
+            expect(res.body.data.updateOrganization).toHaveProperty("organization");
+            done();
+        });
+    });
     afterAll(function (done) {
         // Closing the DB connection allows Jest to exit successfully.
         mongoose_1.default.connection.close();

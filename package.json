@@ -5,7 +5,7 @@
 	"scripts": {
 		"start": "nodemon ./bin/www",
 		"test:unit": "ENV_FILE=./config/.env.test jest --runInBand",
-		"test": "jest"
+		"test": "jest --forceExit"
 	},
 	"dependencies": {
 		"@babel/core": "^7.11.6",
