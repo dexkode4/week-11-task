@@ -6,7 +6,6 @@ import logger from "morgan";
 import mongoose from "mongoose";
 import { graphqlHTTP } from "express-graphql";
 import { schema } from "./schema";
-import { auth } from "./auth";
 import {
 	organization,
 	organizations,

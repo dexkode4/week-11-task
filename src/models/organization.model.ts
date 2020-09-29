@@ -17,7 +17,7 @@ export const organizationSchema = new Schema({
 	updatedAt: { type: Date, default: Date.now },
 });
 
-const Organization = mongoose.model<auth>("Organization", organizationSchema);
+const Organization = mongoose.model("Organization", organizationSchema);
 
 interface auth extends mongoose.Document {
 	organization: string;

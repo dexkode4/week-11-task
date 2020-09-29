@@ -29,14 +29,14 @@ type organization = {
 	_id: string;
 };
 
-export const organizations = ({
+export const organizations = async ({
 	first,
 	limit,
 }: {
 	first: number;
 	limit: number;
 }) => {
-	return organizationModel.find().limit(limit).skip(first).exec();
+	return await organizationModel.find().limit(limit).skip(first).exec();
 };
 
 export const organization = async ({ _id }: id) => {

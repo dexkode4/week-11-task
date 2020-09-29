@@ -56,7 +56,14 @@ var organizationSchema = joi_1.default.object().keys({
 });
 exports.organizations = function (_a) {
     var first = _a.first, limit = _a.limit;
-    return organization_model_1.default.find().limit(limit).skip(first).exec();
+    return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, organization_model_1.default.find().limit(limit).skip(first).exec()];
+                case 1: return [2 /*return*/, _b.sent()];
+            }
+        });
+    });
 };
 exports.organization = function (_a) {
     var _id = _a._id;

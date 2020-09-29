@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 interface auth extends mongoose.Document {
-	username: string;
 	email: string;
 	password: string;
+	register: any;
 }
 const Schema = mongoose.Schema;
 
