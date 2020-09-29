@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // resolvers
 const root = {
-	organizations:organizations,
+	organizations,
 	organization,
 	createOrganization,
 	deleteOrganization,
