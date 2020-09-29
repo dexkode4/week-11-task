@@ -40,7 +40,7 @@ export const organizations = ({
 };
 
 export const organization = async ({ _id }: id) => {
-	const result = await organizationModel.find({ _id }).exec();
+	const result: any = await organizationModel.find({ _id }).exec();
 	return result[0];
 };
 
@@ -66,8 +66,12 @@ export function createOrganization({
 	return new_organization.save();
 }
 
-export const deleteOrganization = ({ _id }: id) => {
-	return organizationModel.findOneAndDelete({ _id });
+export const deleteOrganization = ({
+	organization,
+}: {
+	organization: string;
+}) => {
+	return organizationModel.findOneAndDelete({ organization });
 };
 
 export async function updateOrganization({

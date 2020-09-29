@@ -45,6 +45,11 @@ var organization_model_1 = __importDefault(require("../models/organization.model
 var mongoose_1 = __importDefault(require("mongoose"));
 var request = supertest_1.default(app_1.default);
 var BASE_URL = "/gql";
+afterAll(function () {
+    // Closing the DB connection allows Jest to exit successfully.
+    // mongoose.connection.close();
+    mongoose_1.default.disconnect();
+});
 var length = 0;
 describe("Test for queries and mutation", function () {
     beforeAll(function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -77,7 +82,7 @@ describe("Test for queries and mutation", function () {
         request
             .post(BASE_URL)
             .send({
-            query: '{ organization(_id:"5f7333f21df58658f848fe12") { organization, ceo, marketValue} }',
+            query: '{ organization(_id:"5f7337c9a8548659bb0b1b89") { organization, ceo, marketValue} }',
         })
             .expect(200)
             .end(function (err, res) {
@@ -90,40 +95,40 @@ describe("Test for queries and mutation", function () {
             done();
         });
     });
-    // it("Creates organizations", done => {
-    // 	request
-    // 		.post(BASE_URL)
-    // 		.send({
-    // 			query:
-    // 				'mutation { createOrganization (organization: "new org",marketValue: "50%",ceo: "ceo-name",address: "address is address",employees:["employee1","employee2"],products:["product1","product2"]){organization}}',
-    // 		})
-    // 		.expect(200)
-    // 		.end((err, res) => {
-    // 			if (err) return done(err);
-    // 			expect(res.body.data.createOrganization).toHaveProperty("organization");
-    // 			done();
-    // 		});
-    // });
-    // it("Deletes organizations", done => {
-    // 	request
-    // 		.post(BASE_URL)
-    // 		.send({
-    // 			query:
-    // 				'mutation { deleteOrganization (_id:"5f71abbd5936151c29e9419c") {_id} }',
-    // 		})
-    // 		.expect(200)
-    // 		.end((err, res) => {
-    // 			// res will contain array with one organization
-    // 			if (err) return done(err);
-    // 			expect(res.body.data.deleteOrganization).toBe(null);
-    // 			done();
-    // 		});
-    // });
+    it("Creates organizations", function (done) {
+        request
+            .post(BASE_URL)
+            .send({
+            query: 'mutation { createOrganization (organization: "myOrg",marketValue: "50%",ceo: "ceo-name",address: "address is address",employees:["employee1","employee2"],products:["product1","product2"]){organization}}',
+        })
+            .expect(200)
+            .end(function (err, res) {
+            if (err)
+                return done(err);
+            expect(res.body.data.createOrganization).toHaveProperty("organization");
+            done();
+        });
+    });
+    it("Deletes organizations", function (done) {
+        request
+            .post(BASE_URL)
+            .send({
+            query: 'mutation { deleteOrganization (organization:"myOrg") { organization} }',
+        })
+            .expect(200)
+            .end(function (err, res) {
+            // res will contain array with one organization
+            if (err)
+                return done(err);
+            expect(res.body.data.deleteOrganization).toHaveProperty("organization");
+            done();
+        });
+    });
     it("Updates organizations", function (done) {
         request
             .post(BASE_URL)
             .send({
-            query: 'mutation { updateOrganization (_id:"5f7333f21df58658f848fe12", organization:"demo-org", marketValue:"100%") { _id , organization} }',
+            query: 'mutation { updateOrganization (_id:"5f7337c9a8548659bb0b1b89", organization:"new name", marketValue:"100%") { _id , organization} }',
         })
             .expect(200)
             .end(function (err, res) {
@@ -132,10 +137,5 @@ describe("Test for queries and mutation", function () {
             expect(res.body.data.updateOrganization).toHaveProperty("organization");
             done();
         });
-    });
-    afterAll(function (done) {
-        // Closing the DB connection allows Jest to exit successfully.
-        mongoose_1.default.connection.close();
-        done();
     });
 });

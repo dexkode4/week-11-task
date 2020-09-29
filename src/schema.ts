@@ -28,7 +28,7 @@ export const schema = buildSchema(`
                             products:[String]                    
         ): OrganizationType
         
-        deleteOrganization(_id:String!): OrganizationType
+        deleteOrganization(organization:String!): OrganizationType
 
     }
 

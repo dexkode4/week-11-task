@@ -56,14 +56,7 @@ var organizationSchema = joi_1.default.object().keys({
 });
 exports.organizations = function (_a) {
     var first = _a.first, limit = _a.limit;
-    return __awaiter(void 0, void 0, void 0, function () {
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0: return [4 /*yield*/, organization_model_1.default.find().limit(limit).skip(first).exec()];
-                case 1: return [2 /*return*/, _b.sent()];
-            }
-        });
-    });
+    return organization_model_1.default.find().limit(limit).skip(first).exec();
 };
 exports.organization = function (_a) {
     var _id = _a._id;
@@ -95,8 +88,8 @@ function createOrganization(_a) {
 }
 exports.createOrganization = createOrganization;
 exports.deleteOrganization = function (_a) {
-    var _id = _a._id;
-    return organization_model_1.default.findOneAndDelete({ _id: _id });
+    var organization = _a.organization;
+    return organization_model_1.default.findOneAndDelete({ organization: organization });
 };
 function updateOrganization(_a) {
     var _id = _a._id, organization = _a.organization, marketValue = _a.marketValue, ceo = _a.ceo, address = _a.address, employees = _a.employees, products = _a.products;
@@ -140,7 +133,7 @@ exports.login = function (_a) {
                     if (!user) {
                         throw new Error("No user with that email").message;
                     }
-                    return [4 /*yield*/, bcrypt_1.default.compare(password, user.password)];
+                    return [4 /*yield*/, bcrypt_1.default.compare(password, user.get(password))];
                 case 2:
                     valid = _b.sent();
                     if (!valid) {

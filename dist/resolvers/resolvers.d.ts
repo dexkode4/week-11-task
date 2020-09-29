@@ -17,11 +17,13 @@ export declare const organizations: ({ first, limit, }: {
     first: number;
     limit: number;
 }) => Promise<import("mongoose").Document[]>;
-export declare const organization: ({ _id }: id) => Promise<import("mongoose").Document>;
+export declare const organization: ({ _id }: id) => Promise<any>;
 export declare function createOrganization({ organization, marketValue, ceo, address, employees, products, }: organization): Promise<import("mongoose").Document> | {
     error: Joi.ValidationError | undefined;
 };
-export declare const deleteOrganization: ({ _id }: id) => import("mongoose").DocumentQuery<import("mongoose").Document | null, import("mongoose").Document, {}>;
+export declare const deleteOrganization: ({ organization, }: {
+    organization: string;
+}) => import("mongoose").DocumentQuery<import("mongoose").Document | null, import("mongoose").Document, {}>;
 export declare function updateOrganization({ _id, organization, marketValue, ceo, address, employees, products, }: organization): Promise<import("mongoose").Document | null>;
 export declare const register: ({ email, password, }: {
     email: string;

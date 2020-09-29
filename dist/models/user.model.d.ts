@@ -1,8 +1,3 @@
 import mongoose from "mongoose";
-interface auth extends mongoose.Document {
-    email: string;
-    password: string;
-    register: any;
-}
-declare const User: mongoose.Model<auth, {}>;
+declare const User: mongoose.Model<mongoose.Document, {}>;
 export default User;
