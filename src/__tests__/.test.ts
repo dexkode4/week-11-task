@@ -33,7 +33,7 @@ describe("Test for queries and mutation", () => {
 			.post(BASE_URL)
 			.send({
 				query:
-					'{ organization(_id:"5f73344f1df58658f848fe13") { organization, ceo, marketValue} }',
+					'{ organization(_id:"5f7333f21df58658f848fe12") { organization, ceo, marketValue} }',
 			})
 			.expect(200)
 			.end((err, res) => {
@@ -82,7 +82,7 @@ describe("Test for queries and mutation", () => {
 			.post(BASE_URL)
 			.send({
 				query:
-					'mutation { updateOrganization (_id:"5f73344f1df58658f848fe13", organization:"demo-org", marketValue:"100%") { _id , organization} }',
+					'mutation { updateOrganization (_id:"5f7333f21df58658f848fe12", organization:"demo-org", marketValue:"100%") { _id , organization} }',
 			})
 			.expect(200)
 			.end((err, res) => {
