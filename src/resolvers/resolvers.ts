@@ -29,14 +29,14 @@ type organization = {
 	_id: string;
 };
 
-export const organizations = async ({
+export const organizations = ({
 	first,
 	limit,
 }: {
 	first: number;
 	limit: number;
 }) => {
-	return await organizationModel.find().limit(limit).skip(first).exec();
+	return organizationModel.find().limit(limit).skip(first).exec();
 };
 
 export const organization = async ({ _id }: id) => {
@@ -110,7 +110,7 @@ export const login = async ({
 		throw new Error("No user with that email").message;
 	}
 
-	const valid = await bcrypt.compare(password, user.password);
+	const valid = await bcrypt.compare(password, user.get(password));
 	if (!valid) {
 		throw new Error("Incorrect password").message;
 	}
