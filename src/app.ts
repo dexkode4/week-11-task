@@ -15,13 +15,14 @@ import {
 	register,
 	login,
 } from "./resolvers/resolvers";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
-const url = "mongodb+srv://dexkode:incorrect@cluster0.cqlmp.mongodb.net/week9task?retryWrites=true&w=majority"
-//mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false
-// connect to mongodb
+// const url =
 mongoose
-	.connect(url, {
+	.connect(`${process.env.DATABASE_URL}`, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useCreateIndex: true,

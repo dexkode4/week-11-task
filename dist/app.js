@@ -12,12 +12,12 @@ var mongoose_1 = __importDefault(require("mongoose"));
 var express_graphql_1 = require("express-graphql");
 var schema_1 = require("./schema");
 var resolvers_1 = require("./resolvers/resolvers");
+var dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 var app = express_1.default();
-var url = "mongodb+srv://dexkode:incorrect@cluster0.cqlmp.mongodb.net/week9task?retryWrites=true&w=majority";
-//mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false
-// connect to mongodb
+// const url =
 mongoose_1.default
-    .connect(url, {
+    .connect("" + process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
