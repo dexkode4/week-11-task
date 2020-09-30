@@ -8,7 +8,6 @@ const BASE_URL = "/gql";
 
 afterAll(() => {
 	// Closing the DB connection allows Jest to exit successfully.
-	// mongoose.connection.close();
 	mongoose.disconnect();
 });
 

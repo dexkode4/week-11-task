@@ -47,7 +47,6 @@ var request = supertest_1.default(app_1.default);
 var BASE_URL = "/gql";
 afterAll(function () {
     // Closing the DB connection allows Jest to exit successfully.
-    // mongoose.connection.close();
     mongoose_1.default.disconnect();
 });
 var length = 0;
