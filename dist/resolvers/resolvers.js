@@ -83,7 +83,6 @@ function createOrganization(_a) {
     }
     // console.log(arguments[0]);
     var new_organization = new organization_model_1.default(arguments[0]);
-    console.log(new_organization);
     return new_organization.save();
 }
 exports.createOrganization = createOrganization;

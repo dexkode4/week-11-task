@@ -19,10 +19,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+
 const app = express();
 // const url =
 mongoose
-	.connect(`${process.env.DATABASE_URL}`, {
+	.connect(process.env.DATABASE_URL!, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useCreateIndex: true,

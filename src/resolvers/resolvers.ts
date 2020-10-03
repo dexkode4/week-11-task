@@ -61,8 +61,6 @@ export function createOrganization({
 	}
 	// console.log(arguments[0]);
 	const new_organization = new organizationModel(arguments[0]);
-	console.log(new_organization);
-
 	return new_organization.save();
 }
 

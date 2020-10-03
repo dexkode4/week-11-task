@@ -17,7 +17,7 @@ dotenv_1.default.config();
 var app = express_1.default();
 // const url =
 mongoose_1.default
-    .connect("" + process.env.DATABASE_URL, {
+    .connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
